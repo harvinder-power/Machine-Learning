@@ -15,34 +15,31 @@ from sklearn import metrics # for the check the error and accuracy of the model
 # Any results you write to the current directory are saved as output.
 # dont worry about the error if its not working then insteda of model_selection we can use cross_validation
 
+#Locations of data and which features you want to analyse
 data = pd.read_csv("diabetes.csv")
 features = list(data.columns[1:8])
 
+#Setting up the variables for training and testing
 train,test = train_test_split(data, test_size=0.25, random_state = 0, stratify = data['Outcome'])
 train_x = train[train.columns[:8]]
 test_x = test[test.columns[:8]]
-
 test_y = test['Outcome']
 train_y = train['Outcome']
-
-
-model = DecisionTreeClassifier()
-model.fit(train_x, train_y)
-prediction = model.predict (test_x)
-print "Accuracy = ", metrics.accuracy_score(prediction, test_y)
-
 
 comparison_table = []
 classifiers = ['Linear SVM', 'Radial SVM', 'Logistic Regression', 'K Nearest Neighbours', 'Decision Tree']
 models = [svm.SVC(kernel = 'linear'), svm.SVC(kernel = 'rbf'), LogisticRegression(), KNeighborsClassifier(n_neighbors=3), DecisionTreeClassifier()]
 
-for i in models:
-    model = i
-    model.fit(train_x, train_y)
-    prediction = model.predict(test_x)
-    comparison_table.append(metrics.accuracy_score(prediction, test_y))
-best_model = classifiers[np.argmax(prediction)]
-models_dataframe = pd.DataFrame(comparison_table, index = classifiers)
-models_dataframe.columns=['Accuracy']
-print models_dataframe
-print "The best model for this was:", best_model
+def function_comparator():
+    for i in models:
+        model = i
+        model.fit(train_x, train_y)
+        prediction = model.predict(test_x)
+        comparison_table.append(metrics.accuracy_score(prediction, test_y))
+    best_model = classifiers[np.argmax(prediction)]
+    models_dataframe = pd.DataFrame(comparison_table, index = classifiers)
+    models_dataframe.columns=['Accuracy']
+    print models_dataframe
+    print "The best model for this was:", best_model
+
+function_comparator()
