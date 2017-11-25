@@ -29,3 +29,8 @@ model = DecisionTreeClassifier()
 model.fit(train_x, train_y)
 prediction = model.predict (test_x)
 print "Accuracy = ", metrics.accuracy_score(prediction, test_y)
+
+
+comparison_table = []
+classifiers = ['Linear SVM', 'Radial SVM', 'Logistic Regression', 'K Nearest Neighbours', 'Decision Tree']
+models = [svm.SVC(kernel = 'linear'), svm.SVC(kernel = 'rbf'), LogisticRegression(), K KNeighborsClassifier(n_neighbors=3), DecisionTreeClassifier()]
