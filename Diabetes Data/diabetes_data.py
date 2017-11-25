@@ -17,4 +17,15 @@ from sklearn import metrics # for the check the error and accuracy of the model
 
 data = pd.read_csv("diabetes.csv")
 features = list(data.columns[1:8])
-data.describe()
+
+train,test = train_test_split(data, test_size=0.25, random_state = 0, stratify = data['Outcome'])
+train_x = train[train.columns[:8]]
+test_x = test[test.columns[:8]]
+
+test_y = test['Outcome']
+train_y = train['Outcome']
+
+model = DecisionTreeClassifier()
+model.fit(train_x, train_y)
+prediction = model.predict (test_x)
+print "Accuracy = ", metrics.accuracy_score(prediction, test_y)
