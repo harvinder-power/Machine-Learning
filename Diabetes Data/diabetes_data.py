@@ -1,3 +1,5 @@
+import sys
+import os
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv), data manipulation as in SQL
 import matplotlib.pyplot as plt # this is used for the plot the graph
@@ -16,15 +18,18 @@ from sklearn import metrics # for the check the error and accuracy of the model
 # dont worry about the error if its not working then insteda of model_selection we can use cross_validation
 
 #Locations of data and which features you want to analyse
-data = pd.read_csv("diabetes.csv")
-features = list(data.columns[1:8])
+data = pd.read_csv(raw_input("Which file should I analyse? : "))
+first_column = int(raw_input("What is the starting column number? : "))
+last_column = int(raw_input("What is the last column number? : "))
+outcome = raw_input('What column should I use as the outcome? : ')
 
+features = list(data.columns[first_column:last_column])
 #Setting up the variables for training and testing
-train,test = train_test_split(data, test_size=0.25, random_state = 0, stratify = data['Outcome'])
-train_x = train[train.columns[:8]]
-test_x = test[test.columns[:8]]
-test_y = test['Outcome']
-train_y = train['Outcome']
+train,test = train_test_split(data, test_size=0.25, random_state = 0, stratify = data[outcome])
+train_x = train[train.columns[first_column:last_column]]
+test_x = test[test.columns[first_column:last_column]]
+test_y = test[outcome]
+train_y = train[outcome]
 
 comparison_table = []
 classifiers = ['Linear SVM', 'Radial SVM', 'Logistic Regression', 'K Nearest Neighbours', 'Decision Tree']

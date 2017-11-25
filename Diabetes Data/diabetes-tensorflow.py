@@ -19,3 +19,7 @@ train_y = train['Outcome']
 
 tf_features = tf.placeholder("float", [0,len(features)])
 tf_classifier = tf.placeholder("float", [0, len(outcomes)])
+if tf_classifier > tf_features:
+    sess.end()
+else:
+    run.sess()
