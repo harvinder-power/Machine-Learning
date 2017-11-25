@@ -25,6 +25,7 @@ test_x = test[test.columns[:8]]
 test_y = test['Outcome']
 train_y = train['Outcome']
 
+
 model = DecisionTreeClassifier()
 model.fit(train_x, train_y)
 prediction = model.predict (test_x)
@@ -33,4 +34,15 @@ print "Accuracy = ", metrics.accuracy_score(prediction, test_y)
 
 comparison_table = []
 classifiers = ['Linear SVM', 'Radial SVM', 'Logistic Regression', 'K Nearest Neighbours', 'Decision Tree']
-models = [svm.SVC(kernel = 'linear'), svm.SVC(kernel = 'rbf'), LogisticRegression(), K KNeighborsClassifier(n_neighbors=3), DecisionTreeClassifier()]
+models = [svm.SVC(kernel = 'linear'), svm.SVC(kernel = 'rbf'), LogisticRegression(), KNeighborsClassifier(n_neighbors=3), DecisionTreeClassifier()]
+
+for i in models:
+    model = i
+    model.fit(train_x, train_y)
+    prediction = model.predict(test_x)
+    comparison_table.append(metrics.accuracy_score(prediction, test_y))
+best_model = classifiers[np.argmax(prediction)]
+models_dataframe = pd.DataFrame(comparison_table, index = classifiers)
+models_dataframe.columns=['Accuracy']
+print models_dataframe
+print "The best model for this was:", best_model
