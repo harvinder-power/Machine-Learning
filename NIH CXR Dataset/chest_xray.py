@@ -23,6 +23,7 @@ for img in os.listdir('test'):
     if fnmatch.fnmatch(img, '*.png'):
         img_loaded = image.load_img(img, target_size=(224, 224))
         x = image.img_to_array(img_loaded)
+        print x
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
 
