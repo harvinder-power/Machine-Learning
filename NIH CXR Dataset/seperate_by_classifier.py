@@ -9,7 +9,7 @@ count = 0
 classifiers = []
 
 for i in xrange(len(my_list)-1):
-    if (my_list[i][0] in classifiers):
+    if (my_list[i][0].split('|')[0] in classifiers):
          pass
     else:
         classifiers.append(my_list[i][0])
