@@ -17,13 +17,12 @@ with open('determined_classifiers.csv', 'rb') as f:
 print "Labels:", labels
 
 
-for x in labels:
-    i
+atelectasis_list = []
 count = 0
 for x in labels:
     for i in xrange(len(my_list)-1):
-        if my_list[i+1][1] == "Cardiomegaly":
+        if my_list[i+1][1] == "Atelectasis":
              count+=1
-             names.append(my_list[i+1][0])
+             atelectasis_list.append(my_list[i+1][0])
         print count
-print "Cardiomegaly images", names
+print "Atelectasis images", atelectasis_list
