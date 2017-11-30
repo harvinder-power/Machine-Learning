@@ -17,12 +17,16 @@ with open('determined_classifiers.csv', 'rb') as f:
 print "Labels:", labels
 
 
-atelectasis_list = []
-count = 0
+counts = np.zeros(len(labels))
+
+labelList = [None]*len(labels)
+
 for x in labels:
     for i in xrange(len(my_list)-1):
-        if my_list[i+1][1] == "Atelectasis":
-             count+=1
-             atelectasis_list.append(my_list[i+1][0])
-        print count
-print "Atelectasis images", atelectasis_list
+        for j in xrange(len(labels)):
+            if my_list[i+1][1] == labels[j]:
+                 counts[j]+=1
+                 labelList[j].append(my_list[i+1][0])
+            print counts
+
+#Atelectasis	Cardiomegaly	Consolidation	Edema	Effusion	Emphysema	Fibrosis	Hernia	Infiltration	Mass	No Finding	Nodule	Pleural_Thickening	Pneumonia	Pneumothorax
