@@ -13,20 +13,25 @@ with open('classifications.csv', 'rb') as f:
 #Open determined_classifiers and add labels to a list called "labels"
 with open('determined_classifiers.csv', 'rb') as f:
     reader = csv.reader(f)
-    labels = list(reader)
+    labels = list(reader)[0]
 print "Labels:", labels
 
-
+#initialises the counts list with zeros
 counts = np.zeros(len(labels))
 
-labelList = [None]*len(labels)
+#creates a list within a list to allow for classifiers and their files respectively to be added
+labelList = []
+for i in xrange(len(labels)):
+	labelList.append([])
 
-for x in labels:
-    for i in xrange(len(my_list)-1):
-        for j in xrange(len(labels)):
-            if my_list[i+1][1] == labels[j]:
-                 counts[j]+=1
-                 labelList[j].append(my_list[i+1][0])
-            print counts
+#iterates over the samples to deteremine which files belongs to each classifier, then adds it to that list
+for i in xrange(len(my_list)-1):
+    for j in xrange(len(labels)):
+        if my_list[i][1] == labels[j]:
+             counts[j]+=1
+             labelList[j].append(my_list[i+1][0])
+    if my_list [i][1] not in labelList:
+        print my_list[i+1][1]
 
-#Atelectasis	Cardiomegaly	Consolidation	Edema	Effusion	Emphysema	Fibrosis	Hernia	Infiltration	Mass	No Finding	Nodule	Pleural_Thickening	Pneumonia	Pneumothorax
+print counts
+print sum(counts)
