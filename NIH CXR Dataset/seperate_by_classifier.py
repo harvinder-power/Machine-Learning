@@ -1,6 +1,6 @@
 import csv
 
-with open('/Users/harvinderpower/Desktop/test.csv', 'rb') as f:
+with open('classifications.csv', 'rb') as f:
     reader = csv.reader(f)
     my_list = list(reader)
 print my_list[1]
@@ -14,7 +14,3 @@ for i in xrange(len(my_list)-1):
     else:
         classifiers.append(my_list[i][0])
 print(classifiers)
-
-with open('determined_classifiers.csv', 'wb') as myfile:
-    wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-    wr.writerow(classifiers)
