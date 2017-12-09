@@ -30,3 +30,9 @@ for i in classifiers:
     classifiers_dict[i] = []
 
 print "Classifiers Dictionary:", classifiers_dict
+
+for j in xrange(len(classifiers_dict)):
+    for i in xrange(len(my_list)):
+        if my_list[i][0] == classifiers_dict[j]:
+            classifers_dict[j].append(my_list)[i][0]
+print "New Classifiers Dictionary", classifiers_dict
